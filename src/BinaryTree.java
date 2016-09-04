@@ -375,4 +375,19 @@ public class BinaryTree {
             return false;
         return (isIsomorphic(a.left, b.left) && isIsomorphic(a.right, b.right)) || (isIsomorphic(a.left, b.right) && isIsomorphic(a.right, b.left));
     }
+
+
+    static int leafLevel = 0;
+    public boolean areLeavesAtSameLevel(Node node, int level) {
+        if (node == null)
+            return true;
+        if (node.right == null && node.left == null) {
+            if (leafLevel == 0) {
+                leafLevel = level;
+                return true;
+            }
+            return (level == leafLevel);
+        }
+        return areLeavesAtSameLevel(node.left, level + 1) && areLeavesAtSameLevel(node.right, level + 1);
+    }
 }
